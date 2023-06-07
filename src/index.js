@@ -1,28 +1,27 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import { BaseProvider, LightTheme } from "baseui";
-import { Provider as StyletronProvider } from "styletron-react";
-import { Client as Styletron } from "styletron-engine-atomic";
-
-import "./index.css";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import ReactDOM from "react-dom/client";
+// https://reactjs.org/docs/context.html
+import { AppProvider } from "./appContext";
+// https://redux.js.org/tutorials/fundamentals/part-5-ui-react#passing-the-store-with-provider
+import { Provider } from "react-redux";
+import { store } from "./store";
+// https://create-react-app.dev/docs/adding-bootstrap
+import "bootstrap/dist/css/bootstrap.css";
 import App from "./App";
-import * as serviceWorker from "./serviceWorker";
-import "./assests/font-awesome/css/all.css";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
-const engine = new Styletron();
-console.log("starting");
+// https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
-ReactDOM.render(
-  <StyletronProvider value={engine}>
-    <BaseProvider theme={LightTheme}>
+root.render(
+  <Provider store={store}>
+    <AppProvider>
       <App />
-    </BaseProvider>
-  </StyletronProvider>,
-  document.getElementById("root")
+    </AppProvider>
+  </Provider>
 );
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// Learn more about service workers: https://cra.link/PWA
+serviceWorkerRegistration.register();
