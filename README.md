@@ -1,127 +1,95 @@
-# A React Portfolio Template for GitHub
+<a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FTasin5541%2Fportfolio&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
 
-[![GitHub Repo stars](https://img.shields.io/github/stars/mshuber1981/github-react-portfolio-template?color=%2361dbfb&style=for-the-badge&logo=github)](https://github.com/mshuber1981/github-react-portfolio-template/stargazers/) [![GitHub Repo Forks](https://img.shields.io/github/forks/mshuber1981/github-react-portfolio-template?color=%2361dbfb&style=for-the-badge&logo=github&label=Forks)](https://github.com/mshuber1981/github-react-portfolio-template/network/members)
+Please give a star and link to this repo in your website, so that the project can grow.
 
-A performant, accessible, progressive React portfolio template that uses the [GitHub REST API](https://docs.github.com/en/free-pro-team@latest/rest).
+<p align="center"> 
+    <a href="https://tasin5541.github.io" target="_blank">
+    <img src="images/theme.gif" align="center"></img>
+    </a>
+</p>
 
-Add your GitHub username once and all of your info will automatically be updated. Deploy to GitHub pages in a few simple steps.
+# Demo
+To view a live demo, **[click here](https://tasin5541.github.io/)**
 
-## [Live Demo](https://mshuber1981.github.io/github-react-portfolio-template/#/)
+# Toggle Theme
+<p align="center"> 
+    <img src="images/toggle.gif" align="center"></img>
+</p>
 
-[Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/)
+# How to use
 
-![Page Speed](/README_images/speed.png)
+- Remove `<meta http-equiv="refresh" content="0;url=https://tasin5541.github.io/" />` in the `index.html` file
+- You'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer 
+- Create a repository in github named username.github.io (your github username in place of username)
+- Open up cmd/powershell in admin mode and enter the following line to download this repository
 
-## Light And Dark Themes
+  - ```python
+     git clone https://github.com/Tasin5541/portfolio.git
+    ```
+- Then go to `C:\Windows\System32\portfolio` in your File Explorer
+- Delete the `.git` file
+- Open `package.json` and add your repository name ("https://your_github_username.github.io") to the homepage section
 
-![Hero Light](/README_images/hero.png)
+  - ```python
+     "homepage": "https://username.github.io"
+    ```
+    
+- Create a file called .env in the root directory of your project, type the following in cmd/powershell
 
-![Hero Dark](/README_images/heroDark.png)
+  - ```bash
+    cp env.example .env
+    ```
 
-### Getting Started
+- Inside the .env file, add key `REACT_APP_GITHUB_TOKEN` and assign your github token like this.
 
-1. [Create a repository from this template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)
-2. [Clone your repository](https://developers.google.com/speed/pagespeed/insights/)
-3. Make sure [Node](https://nodejs.org/en/) is installed
-4. Open your project and install the dependencies
+  - ```javascript
+     // .env
+      REACT_APP_GITHUB_TOKEN = "YOUR GITHUB TOKEN HERE"
+    ```
 
-   ```bash
-   npm install
-   ```
+You can get a github token as described [here](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token). Give all permissions while generating token. Also add your `githubUserName` in the correct field inside `git_data_fetcher.js`.
 
-5. Navigate to the src directory and open data.js
-6. Add your GitHub username ([data.js](https://github.com/mshuber1981/github-react-portfolio-template/blob/main/src/data.js#L14) lines 14-18)
+- You will find `git_data_fetcher.js` file in the main directory of the repository. This file is used to fetch the data (Pull requests, Issues, Organizations, Pinned projects etc.) from your github.
+If you open the file, you will see below component at the top of the file. You need to change only that component.
 
-   ```javascript
-   /* START HERE
-   ************************************************************** 
-     Add your GitHub username (string - "YourUsername") below.
-   */
-   export const githubUsername = "Your GitHub username here";
-   ```
+  - ```python
+    const openSource = {
+      githubUserName: "Your Github Username Here.",
+    };
+    ```
+- Navigate to `C:\Windows\System32\portfolio\src` and open the `portfolio.js` file to change your information
+- Type the following lines in cmd/powershell one by one and press enter after each line
+ 
+  - ```python
+     cd portfolio
+     
+     npm install
+     
+     node git_data_fetcher.js
+     
+     npm run build
+     
+     #To view the website in localhost before deploying
+     npm start
+     #press ctrl+c in cmd to stop the localhost if you executed the last command
+     
+     #Deploy to github
+     cd build
+     
+     git init
+     
+     #Use your github username
+     git remote add origin https://github.com/username/username.github.io.git
+     
+     git add .
+     
+     git commit -m 'deploy'
+     
+     git push -u origin master
+    ```
+ - You're all set, now visit "username.github.io" to see your website
+ - Note: You'll need to copy the `.git` file inside build folder and save it elsewhere. Everytime you update any information run `npm build` and copy the `.git` back into build folder before continuing with `git add .` and the rest of the commands. Remember to copy the `.git` everytime you run `npm build`
 
-7. Start the development server to view the results
+# References 👏🏻
 
-   ```bash
-   npm start
-   ```
-
-### Updating the Projects section
-
-![Projects](/README_images/projects.png)
-
-1. Follow the instructions to update the filteredProjects array ([data.js](https://github.com/mshuber1981/github-react-portfolio-template/blob/main/src/data.js#L85) lines 85-89)
-
-   ```javascript
-   /* Projects
-   ************************************************************** 
-     List the repo names (string - "your-repo-name") you want to include (they will be sorted alphabetically). If empty, only the first 3 will be included.
-   */
-   export const filteredProjects = ["example-1", "example-2", "example-3"];
-   ```
-
-2. Import the projects images you want to use ([data.js](https://github.com/mshuber1981/github-react-portfolio-template/blob/main/src/data.js#L4) lines 4-5) or the default image will be applied
-
-   ```javascript
-   // Projects Images (add your images to the images directory and import below)
-   import Logo from "./images/logo.svg";
-   ```
-
-3. Follow the instructions to update the projectData array ([data.js](https://github.com/mshuber1981/github-react-portfolio-template/blob/main/src/data.js#L91) lines 91-97)
-
-   ```javascript
-   // Replace the defualt GitHub image for matching repos below (images imported above - lines 13-14)
-   export const projectCardImages = [
-     {
-       name: "example-1",
-       image: Logo,
-     },
-   ];
-   ```
-
-### Updating the Contact section
-
-![Projects](/README_images/contact.png)
-
-1. The contact form uses [Formspree](https://formspree.io/), create an account and add your endpoint URL ([data.js](https://github.com/mshuber1981/github-react-portfolio-template/blob/main/src/data.js#L99) lines 99-104)
-
-   ```javascript
-   /* Contact Info
-   ************************************************************** 
-     Add your formspree endpoint below.
-     https://formspree.io/
-   */
-   export const formspreeUrl = "https://formspree.io/f/YourEndpoint";
-   ```
-
-### Deploy
-
-A helpful guide for Create React App deployments with GitHub Pages can be found [here](https://create-react-app.dev/docs/deployment#github-pages).
-
-1. Update the homepage value ([package.json](https://github.com/mshuber1981/github-react-portfolio-template/blob/0133fcc02ab048fefcf73825d02385ffe27c3721/package.json#L3) line 3)
-
-   ```json
-   "homepage": "https://YourUsername.github.io/your-app/",
-   ```
-
-2. Run the deploy command
-
-   ```bash
-   npm run deploy
-   ```
-
-### Customization Options
-
-Checkout the [Wiki](https://github.com/mshuber1981/github-react-portfolio-template/wiki) for additional customization options:
-
-- [Updating the Hero images](https://github.com/mshuber1981/github-react-portfolio-template/wiki/Updating-the-Hero-images)
-- [Add a custom Blog icon](https://github.com/mshuber1981/github-react-portfolio-template/wiki/Updating-the-Hero-images#add-a-custom-blog-icon)
-- [Updating the About Me section](https://github.com/mshuber1981/github-react-portfolio-template/wiki/Updating-the-About-Me-section)
-- [Updating the Skills section](https://github.com/mshuber1981/github-react-portfolio-template/wiki/Updating-the-Skills-section)
-- [Add a link to your resume](https://github.com/mshuber1981/github-react-portfolio-template/wiki/Updating-the-Skills-section#add-a-link-to-your-resume)
-
-[Back to top :top:](#a-react-portfolio-template-for-github)
-
-### License
-
-[MIT](https://choosealicense.com/licenses/mit/)
+- Most of the Design and Implementation Ideas are taken from [Saad Pasta's Portfolio Project](https://github.com/saadpasta/developerFolio) and [ashutosh1919 masterPortfolio Project](https://github.com/ashutosh1919/masterPortfolio).
